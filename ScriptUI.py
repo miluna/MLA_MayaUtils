@@ -15,7 +15,7 @@ class ScriptUI:
 		self.name = name
 		
 		if cmds.window(self.id, exists = True):
-			cmds.deleteUI(self.id)
+			self.close()
 		
 		cmds.window (self.id, title= name, iconName= name, sizeable=True, widthHeight=(width, height) )
 		
@@ -91,5 +91,8 @@ class ScriptUI:
 		else:
 			return cmds.floatSliderGrp(id, query= True, value= True)
 	
-	def showWindow(self):
+	def show(self):
 		return cmds.showWindow(self.id)
+	
+	def close(self):
+		return cmds.deleteUI(self.id)
