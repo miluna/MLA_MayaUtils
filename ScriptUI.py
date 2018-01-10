@@ -1,7 +1,6 @@
 '''
 Author: Miguel Angel Luna
-Updated: 1/2018
-
+Class used as template to create new script GUI using maya cmds
 '''
 
 import maya.cmds as cmds
