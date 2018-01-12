@@ -1,6 +1,6 @@
 '''
 Author: Miguel Angel Luna
-Static class created to manage files within Maya
+Updated: 1/2018
 
 '''
 
@@ -8,8 +8,9 @@ import csv
 import json
 import maya.cmds as cmds
 
+
 class FileManager:
-    
+
     @staticmethod
     def fileSelector(filetype, filefilter):
         '''
@@ -25,7 +26,7 @@ class FileManager:
     @staticmethod
     def readJsonFile():
         try:
-            file = fileSelector(1, "json")
+            file = FileManager.fileSelector(1, "json")
             with open(file[0], 'r') as jsonFile:
                 return json.load(jsonFile)
         except:
@@ -34,17 +35,17 @@ class FileManager:
     @staticmethod
     def writeJsonFile(content):
         try:
-            file = fileSelector(0, "json")
+            file = FileManager.fileSelector(0, "json")
             with open(file[0], "w") as jsonFile:
                 json.dump(content, jsonFile, sort_keys=True, indent=4, separators=(',', ': '))
                 print "Data was successfully written",
-            except:
+        except:
             cmds.error("Could not write json file")
 
     @staticmethod
     def readCsvFile():
         try:
-            file = fileSelector(1, "csv")
+            file = FileManager.fileSelector(1, "csv")
             with open(file[0], "r") as csvfile:
                 reader = csv.reader(csvfile)
                 return reader
@@ -54,7 +55,7 @@ class FileManager:
     @staticmethod
     def saveCsvFile(content, header=""):
         try:
-            file = fileSelector(0)
+            file = FileManager.fileSelector(0)
             with open(file[0], "w") as csvfile:
                 writer = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_NONE, escapechar='\\')
                 writer.writerow(header)
