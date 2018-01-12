@@ -102,7 +102,7 @@ class Selection:
 			cmds.xform(Selection.getSelected(), translation=[list[0], list[1], list[2]])
 
 	@staticmethod
-	def vertexCount():
+	def getVertexCount():
 		return cmds.polyEvaluate(Selection.getSelected(), v=True)
 
 	@staticmethod

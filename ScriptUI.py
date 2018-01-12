@@ -11,6 +11,9 @@ class ScriptUI:
 	Script main UI class helps to create new script windows based on common procedures
 	'''
 
+	fieldIds = []
+	sliderIds = []
+
 	def __init__(self, name="New Script Window", id="ScriptUIWindow", width=300, height=500):
 		self.name = name
 		self.id = id
@@ -22,7 +25,8 @@ class ScriptUI:
 
 	def addLayout(self, type="grid", id=""):
 		'''
-		Valid layouts are grid, column, tab and row. All buttons, text and sliders after the layout are parented to it.
+		Valid layouts are grid, column, tab, row and form.
+		All buttons, text and sliders after the layout are parented to it.
 		For adding a new layout to a tab, use cmds.setParent( '..' ) before adding it
 		'''
 		if type == "grid":
@@ -33,6 +37,14 @@ class ScriptUI:
 			return cmds.tabLayout(id, innerMarginWidth=5, innerMarginHeight=5)
 		if type == "row":
 			return cmds.rowLayout(id, numberOfColumns=4, columnWidth3=(80, 75, 150), adjustableColumn=2)
+		if type == "form":
+			return cmds.formLayout(id)
+
+	def addScrollfield(self):
+		return cmds.scrollField("field_printer", editable=True, h=800, w=800, text="")
+
+	def addToScrollfield(self, text=""):
+		return cmds.scrollField("field_printer", edit=True, insertText=str(text))
 
 	def addText(self, labeling=""):
 		return cmds.text(label=labeling)
@@ -55,6 +67,7 @@ class ScriptUI:
 		'''
 		Valid fields are text, int and float.
 		'''
+		self.fieldIds.append(id)
 		if type == "text":
 			return cmds.textField(id)
 		if type == "int":
@@ -77,6 +90,7 @@ class ScriptUI:
 		'''
 		Valid sliders are int and float.
 		'''
+		self.sliderIds.append(id)
 		if type == "int":
 			return cmds.intSliderGrp(id, field=True, min=minV, max=maxV, value=0, step=stepChange)
 		else:
