@@ -22,18 +22,29 @@ class Selection:
 		return cmds.listRelatives(groupName, children=True)
 
 	@staticmethod
+	def roundList(numbersList):
+		i=0
+		for n in numbersList:
+			numbersList[i] = round (n,3)
+			i+=1
+		return numbersList
+
+	@staticmethod
 	def getPosition(queriedObject):
 		pos = cmds.xform(queriedObject, query=True, translation=True)
+		pos = Selection.roundList(pos)
 		return pos
 
 	@staticmethod
 	def getWorldPosition(queriedObject):
 		pos = cmds.xform(queriedObject, query=True, worldSpace=True, translation=True)
+		pos = Selection.roundList(pos)
 		return pos
 
 	@staticmethod
 	def getRotation(queriedObject):
 		rot = cmds.xform(queriedObject, query=True, rotation=True)
+		rot = Selection.roundList(rot)
 		return rot
 
 	@staticmethod
@@ -45,17 +56,38 @@ class Selection:
 		scale.append(sclY)
 		sclZ = cmds.getAttr(queriedObject + ".scaleZ")
 		scale.append(sclZ)
+		scale = Selection.roundList(scale)
 		return scale
 
 	@staticmethod
 	def getPivot(queriedObject):
 		piv = cmds.xform(queriedObject, query=True, rotatePivot=True)
+		piv = Selection.roundList(piv)
 		return piv
 
 	@staticmethod
 	def getWorldPivot(queriedObject):
 		piv = cmds.xform(queriedObject, query=True, worldSpace=True, rotatePivot=True)
+		piv = Selection.roundList(piv)
 		return piv
+
+	@staticmethod
+	def getRGB (model):
+		try:
+			RGB = []
+			colorR = cmds.getAttr(model + ".colorR")
+			colorG = cmds.getAttr(model + ".colorG")
+			colorB = cmds.getAttr(model + ".colorB")
+
+			RGB.append(colorR)
+			RGB.append(colorG)
+			RGB.append(colorB)
+			RGB = Selection.roundList(RGB)
+			return RGB
+		except:
+			RGB = [0, 0, 0]
+			return RGB
+
 
 	@staticmethod
 	def storeSelection(transform="pivot", list=firstObjectPivot):
