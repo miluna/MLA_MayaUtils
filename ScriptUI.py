@@ -57,11 +57,8 @@ class ScriptUI:
 		return cmds.button(label=text, command=action)
 
 	def addSeparator(self, amount=1, styling="none"):
-		if amount == 1:
-			return cmds.separator(style=styling)
-		else:
-			for i in range(0, amount):
-				cmds.separator(style=styling)
+		for i in range(0, amount):
+			cmds.separator(style=styling)
 
 	def addField(self, type='int', id='newField'):
 		'''
@@ -75,7 +72,7 @@ class ScriptUI:
 		if type == "float":
 			return cmds.floatField(id, value=0)
 
-	def queryField(self, type='text', id='newField'):
+	def queryField(self, type='int', id='newField'):
 		'''
 		Valid fields are text, int and float. Query is based on the id of the field.
 		'''
@@ -86,7 +83,7 @@ class ScriptUI:
 		if type == "float":
 			return cmds.floatField(id, query=True, value=True)
 
-	def addSlider(self, type='int', id='newField', minV=100, maxV=0, stepChange=1):
+	def addSlider(self, type='int', id='newField', minV=0, maxV=10, stepChange=1):
 		'''
 		Valid sliders are int and float.
 		'''
