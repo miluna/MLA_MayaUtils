@@ -149,3 +149,33 @@ class Selection:
 
 		distance = ((vertexAx - vertexBx) ** 2 + (vertexAy - vertexBy) ** 2 + (vertexAz - vertexBz) ** 2) ** 0.5
 		return distance
+	
+	@staticmethod
+	def getDistanceBetween (obj1Pos, obj2Pos):
+	sumX = 0
+	sumY = 0
+	sumZ = 0
+
+	i = 0
+	for p in obj1Pos:
+		if i == 0:
+			print p
+			sumX += p
+		if i == 1:
+			sumY += p
+		if i == 2:
+			sumZ += p
+		i += 1
+
+	i = 0
+	for p in obj2Pos:
+		if i == 0:
+			sumX += p
+		if i == 1:
+			sumY += p
+		if i == 2:
+			sumZ += p
+		i += 1
+
+	middleposition = [sumX / 2, sumY / 2, sumZ / 2]
+	return middleposition
