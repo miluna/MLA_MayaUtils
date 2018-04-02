@@ -80,3 +80,15 @@ class MayaModel:
 	def setPivot(self, pivotArray):
 		cmds.xform(self.fullname, rotatePivot=pivotArray)
 		cmds.xform(self.fullname, scalePivot=pivotArray)
+		
+	def toJson(self):
+		dictionary = {
+			"namespace":self.nameSpace,
+			"hierarchy":self.hierarchy,
+			"name":self.name,
+			"pivot":self.getPivot(),
+			"position":self.getPosition(),
+			"rotation":self.getRotation(),
+			"scale":self.getScale()
+		}
+		return json.dumps(dictionary, sort_keys=True, indent=4, separators=(',', ': '))
