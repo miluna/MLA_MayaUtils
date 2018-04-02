@@ -2,6 +2,7 @@
 Author: Miguel Angel Luna
 '''
 import maya.cmds as cmds
+import json
 
 class MayaModel:
 	'''
